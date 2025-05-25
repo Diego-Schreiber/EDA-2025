@@ -118,4 +118,18 @@ public class List<T> {
         }
         return -1;
     }
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        Node<T> current = head;
+        while (current != null) {
+            sb.append(current.getDato());
+            if (current.getNextNode() != null)
+                sb.append(", ");
+           current = current.getNextNode();
+        }
+        sb.append("]");
+        return sb.toString();
+    }
 }

@@ -26,4 +26,34 @@ public class List<T> {
         current.dato = element;
         return oldValue;
     }
+    public boolean add(T element) {
+        Node<T> newNode = new Node<>(element);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node<T> current = head;
+            while (current.getNextNode() != null) {
+                current = current.getNextNode();
+            }
+            current.setNextNode(newNode);
+        }
+        size++;
+        return true;
+    }
+    public void add(int index, T element) {
+        if (index < 0 || index > size) throw new IndexOutOfBoundsException();
+        Node<T> newNode = new Node<>(element);
+        if (index == 0) {
+            newNode.setNextNode(head);
+            head = newNode;
+        } else {
+            Node<T> current = head;
+            for (int i = 0; i < index - 1; i++) {
+                current = current.getNextNode();
+            }
+            newNode.setNextNode(current.getNextNode());
+            current.setNextNode(newNode);
+        }
+        size++;
+    }
 }

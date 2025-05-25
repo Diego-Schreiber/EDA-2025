@@ -34,4 +34,7 @@ public class Ejercicio2 {
     static <T extends Number>double suma(T valor1, T valor2){
         return valor1.doubleValue()+valor2.doubleValue();
     }
+    static <T extends Number>double resta(T valor1, T valor2){
+        return valor1.doubleValue()-valor2.doubleValue();
+    }
 }

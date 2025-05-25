@@ -96,4 +96,12 @@ public class List<T> {
     public boolean isEmpty() {
         return size == 0;
     }
+    public boolean contains(Object o) {
+        Node<T> current = head;
+        while (current != null) {
+            if (current.getDato().equals(o)) return true;
+            current = current.getNextNode();
+        }
+        return false;
+    }
 }

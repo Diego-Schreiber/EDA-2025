@@ -56,4 +56,38 @@ public class List<T> {
         }
         size++;
     }
+    public boolean remove(Object o) {
+        Node<T> current = head;
+        Node<T> previous = null;
+        while (current != null) {
+            if (current.getDato().equals(o)) {
+                if (previous == null) {
+                    head = current.getNextNode();
+                } else {
+                    previous.setNextNode(current.getNextNode());
+                }
+                size--;
+                return true;
+            }
+            previous = current;
+            current = current.getNextNode();
+        }
+        return false;
+    }
+    public T remove(int index) {
+        if (index < 0 || index >= size) throw new IndexOutOfBoundsException();
+        Node<T> current = head;
+        Node<T> previous = null;
+        for (int i = 0; i < index; i++) {
+            previous = current;
+            current = current.getNextNode();
+        }
+        if (previous == null) {
+            head = current.getNextNode();
+        } else {
+            previous.setNextNode(current.getNextNode());
+        }
+        size--;
+        return current.getDato();
+    }
 }

@@ -8,4 +8,22 @@ public class List<T> {
         this.head = null;
         this.size = 0;
     }
+    public T get(int index) {
+        if (index < 0 || index >= size) throw new IndexOutOfBoundsException();
+        Node<T> current = head;
+        for (int i = 0; i < index; i++) {
+            current = current.getNextNode();
+        }
+        return current.getDato();
+    }
+    public T set(int index, T element) {
+        if (index < 0 || index >= size) throw new IndexOutOfBoundsException();
+        Node<T> current = head;
+        for (int i = 0; i < index; i++) {
+            current = current.getNextNode();
+        }
+        T oldValue = current.getDato();
+        current.dato = element;
+        return oldValue;
+    }
 }

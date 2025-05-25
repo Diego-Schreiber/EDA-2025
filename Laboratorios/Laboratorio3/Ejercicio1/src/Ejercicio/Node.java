@@ -7,4 +7,16 @@ public class Node <T>{
     public Node(T d){
         dato=d;
     }
+    public T getDato(){
+        return dato;
+    }
+    public void setDato(T d){
+        dato=d;
+    }
+    public void setNextNode(Node n){
+        nextNode=n;
+    }
+    public Node getNextNode(){
+        return nextNode;
+    }
 }

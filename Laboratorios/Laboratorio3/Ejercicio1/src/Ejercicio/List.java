@@ -104,4 +104,8 @@ public class List<T> {
         }
         return false;
     }
+    public void clear() {
+        head = null;
+        size = 0;
+    }
 }

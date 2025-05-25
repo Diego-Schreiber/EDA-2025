@@ -108,4 +108,14 @@ public class List<T> {
         head = null;
         size = 0;
     }
+    public int indexOf(Object o) {
+        Node<T> current = head;
+        int index = 0;
+        while (current != null) {
+            if (current.getDato().equals(o)) return index;
+            current = current.getNextNode();
+            index++;
+        }
+        return -1;
+    }
 }

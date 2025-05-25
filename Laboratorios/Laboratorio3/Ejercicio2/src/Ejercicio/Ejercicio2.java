@@ -40,4 +40,7 @@ public class Ejercicio2 {
     static <T extends Number>double producto(T valor1, T valor2){
         return valor1.doubleValue()*valor2.doubleValue();
     }
+    static <T extends Number>double division(T valor1, T valor2){
+        return valor1.doubleValue()/valor2.doubleValue();
+    }
 }

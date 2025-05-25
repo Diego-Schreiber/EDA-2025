@@ -46,4 +46,7 @@ public class Ejercicio2 {
     static <T extends Number>double potencia(T valor1, T valor2){
         return Math.pow(valor1.doubleValue(),valor2.doubleValue());
     }
+    static <T extends Number> double raizCuadrada(T numero) {
+        return Math.sqrt(numero.doubleValue());
+    }
 }

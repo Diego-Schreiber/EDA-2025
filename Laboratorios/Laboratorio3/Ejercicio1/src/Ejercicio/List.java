@@ -90,4 +90,7 @@ public class List<T> {
         size--;
         return current.getDato();
     }
+    public int size() {
+        return size;
+    }
 }

@@ -49,4 +49,7 @@ public class Ejercicio2 {
     static <T extends Number> double raizCuadrada(T numero) {
         return Math.sqrt(numero.doubleValue());
     }
+    static <T extends Number> double raizCubica(T numero) {
+        return Math.cbrt(numero.doubleValue());
+    }
 }

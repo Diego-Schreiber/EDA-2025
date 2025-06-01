@@ -1,12 +1,12 @@
 package Ejercicio;
 //Autor: Diego Schreiber
 //Lista doblemente enlazada
-public class linkedList <E>{
+public class linkedList<E> {
     private Nodo<E> cabeza;
     private Nodo<E> cola;
-    public linkedList(){
-        cabeza=null;
-        cola=null;
+    public linkedList() {
+        cabeza = null;
+        cola = null;
     }
     public void agregarAlFinal(E dato) {
         Nodo<E> nuevo = new Nodo<>(dato);
@@ -30,6 +30,14 @@ public class linkedList <E>{
         while (actual != null) {
             System.out.print(actual.dato + " ");
             actual = actual.siguiente;
+        }
+        System.out.println();
+    }
+    public void imprimirAtras() {
+        Nodo<E> actual = cola;
+        while (actual != null) {
+            System.out.print(actual.dato + " ");
+            actual = actual.anterior;
         }
         System.out.println();
     }

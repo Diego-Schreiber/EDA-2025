@@ -23,4 +23,7 @@ public class listaEnlazada<T>{
         nuevo.siguiente = cabeza;
         cabeza = nuevo;
     }
+    public void addLast(T dato) {
+        insert(dato);
+    }
 }

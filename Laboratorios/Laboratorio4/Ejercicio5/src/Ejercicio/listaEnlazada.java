@@ -26,4 +26,18 @@ public class listaEnlazada<T>{
     public void addLast(T dato) {
         insert(dato);
     }
+    public void deleteByKey(T clave) {
+        if (cabeza == null) return;
+        if (cabeza.dato.equals(clave)) {
+            cabeza = cabeza.siguiente;
+            return;
+        }
+        Nodo<T> actual = cabeza;
+        while (actual.siguiente != null && !actual.siguiente.dato.equals(clave)) {
+            actual = actual.siguiente;
+        }
+        if (actual.siguiente != null) {
+            actual.siguiente = actual.siguiente.siguiente;
+        }
+    }
 }

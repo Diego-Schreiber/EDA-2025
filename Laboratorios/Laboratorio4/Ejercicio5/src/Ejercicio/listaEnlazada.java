@@ -40,4 +40,19 @@ public class listaEnlazada<T>{
             actual.siguiente = actual.siguiente.siguiente;
         }
     }
+    public void deleteAtPosition(int posicion) {
+        if (posicion < 0 || cabeza == null) return;
+
+        if (posicion == 0) {
+            cabeza = cabeza.siguiente;
+            return;
+        }
+        Nodo<T> actual = cabeza;
+        for (int i = 0; actual != null && i < posicion - 1; i++) {
+            actual = actual.siguiente;
+        }
+        if (actual != null && actual.siguiente != null) {
+            actual.siguiente = actual.siguiente.siguiente;
+        }
+    }
 }

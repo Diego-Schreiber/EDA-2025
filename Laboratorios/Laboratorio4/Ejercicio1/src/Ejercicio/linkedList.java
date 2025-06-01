@@ -8,4 +8,15 @@ public class linkedList <E>{
         cabeza=null;
         cola=null;
     }
+    public void agregarAlFinal(E dato) {
+        Nodo<E> nuevo = new Nodo<>(dato);
+        if (cabeza == null) {
+            cabeza = nuevo;
+            cola = nuevo;
+        } else {
+            cola.siguiente = nuevo;
+            nuevo.anterior = cola;
+            cola = nuevo;
+        }
+    }
 }

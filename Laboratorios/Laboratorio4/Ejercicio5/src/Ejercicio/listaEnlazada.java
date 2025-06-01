@@ -18,4 +18,9 @@ public class listaEnlazada<T>{
             actual.siguiente = nuevo;
         }
     }
+    public void addFirst(T dato) {
+        Nodo<T> nuevo = new Nodo<>(dato);
+        nuevo.siguiente = cabeza;
+        cabeza = nuevo;
+    }
 }

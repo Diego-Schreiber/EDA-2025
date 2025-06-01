@@ -60,4 +60,15 @@ public class listaEnlazada<T>{
             cabeza = cabeza.siguiente;
         }
     }
+    public void removeLast() {
+        if (cabeza == null || cabeza.siguiente == null) {
+            cabeza = null;
+            return;
+        }
+        Nodo<T> actual = cabeza;
+        while (actual.siguiente.siguiente != null) {
+            actual = actual.siguiente;
+        }
+        actual.siguiente = null;
+    }
 }

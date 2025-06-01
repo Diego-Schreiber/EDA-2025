@@ -6,4 +6,16 @@ public class listaEnlazada<T>{
     public listaEnlazada(){
         cabeza=null;
     }
+    public void insert(T dato) {
+        Nodo<T> nuevo = new Nodo<>(dato);
+        if (cabeza == null) {
+            cabeza = nuevo;
+        } else {
+            Nodo<T> actual = cabeza;
+            while (actual.siguiente != null) {
+                actual = actual.siguiente;
+            }
+            actual.siguiente = nuevo;
+        }
+    }
 }

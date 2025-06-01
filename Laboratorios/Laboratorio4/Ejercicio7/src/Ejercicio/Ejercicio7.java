@@ -1,8 +1,8 @@
 package Ejercicio;
 //Autor: Diego Schreiber
-//Clase main de ejercicio6
+//Clase main de ejercicio7
 import java.util.Scanner;
-public class Ejercicio6 {
+public class Ejercicio7 {
     public static void main(String[] args) {
         DobleEnlazamiento<Integer> lista = new DobleEnlazamiento<>();
         for (int i = 1; i <= 10; i++) {

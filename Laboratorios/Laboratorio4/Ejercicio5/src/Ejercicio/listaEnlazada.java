@@ -71,4 +71,13 @@ public class listaEnlazada<T>{
         }
         actual.siguiente = null;
     }
+    public int size() {
+        int contador = 0;
+        Nodo<T> actual = cabeza;
+        while (actual != null) {
+            contador++;
+            actual = actual.siguiente;
+        }
+        return contador;
+    }
 }

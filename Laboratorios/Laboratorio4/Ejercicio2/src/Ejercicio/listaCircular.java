@@ -20,4 +20,16 @@ public class listaCircular{
             nuevo.siguiente = cabeza;
         }
     }
+    public void imprimir() {
+        if (cabeza == null) {
+            System.out.println("La lista está vacía.");
+            return;
+        }
+        Nodo actual = cabeza;
+        do {
+            System.out.print(actual.dato + " ");
+            actual = actual.siguiente;
+        } while (actual != cabeza);
+        System.out.println();
+    }
 }

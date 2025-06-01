@@ -80,4 +80,12 @@ public class listaEnlazada<T>{
         }
         return contador;
     }
+    public void printList() {
+        Nodo<T> actual = cabeza;
+        while (actual != null) {
+            System.out.print(actual.dato + " ");
+            actual = actual.siguiente;
+        }
+        System.out.println();
+    }
 }

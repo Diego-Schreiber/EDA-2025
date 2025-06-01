@@ -55,4 +55,9 @@ public class listaEnlazada<T>{
             actual.siguiente = actual.siguiente.siguiente;
         }
     }
+    public void removeFirst() {
+        if (cabeza != null) {
+            cabeza = cabeza.siguiente;
+        }
+    }
 }

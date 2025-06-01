@@ -19,4 +19,10 @@ public class linkedList <E>{
             cola = nuevo;
         }
     }
+    public E obtenerPrimero() {
+        if (cabeza != null) {
+            return cabeza.dato;
+        }
+        return null; 
+    }
 }

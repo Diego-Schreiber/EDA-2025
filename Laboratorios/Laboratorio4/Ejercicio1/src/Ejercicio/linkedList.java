@@ -25,4 +25,12 @@ public class linkedList <E>{
         }
         return null; 
     }
+    public void imprimirAdelante() {
+        Nodo<E> actual = cabeza;
+        while (actual != null) {
+            System.out.print(actual.dato + " ");
+            actual = actual.siguiente;
+        }
+        System.out.println();
+    }
 }

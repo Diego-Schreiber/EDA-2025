@@ -34,4 +34,7 @@ public class QueueList<T>{
     public boolean isEmpty() {
         return frente == null;
     }
+    public boolean isFull() {
+        return false;
+    }
 }

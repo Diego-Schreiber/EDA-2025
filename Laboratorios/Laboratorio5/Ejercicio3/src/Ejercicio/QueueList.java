@@ -16,4 +16,11 @@ public class QueueList<T>{
             fin = nuevo;
         }
     }
+    public T dequeue() {
+        if (isEmpty()) throw new RuntimeException("Cola vacía");
+        T dato = frente.getDato();
+        frente = frente.getSiguiente();
+        if (frente == null) fin = null;
+        return dato;
+    }
 }

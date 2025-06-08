@@ -11,5 +11,10 @@ public class StackList<T>{
         nuevo.setSiguiente(cima);
         cima=nuevo;
     }
-
+    public T pop() {
+        if (isEmpty()) throw new RuntimeException("Pila vacía");
+        T dato = cima.getDato();
+        cima = cima.getSiguiente();
+        return dato;
+    }
 }

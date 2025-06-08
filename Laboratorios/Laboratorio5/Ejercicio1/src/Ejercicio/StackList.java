@@ -27,4 +27,7 @@ public class StackList<T>{
     public boolean isFull() {
         return false;
     }
+    public void destroyStack() {
+        cima = null;
+    }
 }

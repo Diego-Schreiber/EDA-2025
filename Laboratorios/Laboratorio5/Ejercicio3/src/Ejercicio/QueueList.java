@@ -7,4 +7,13 @@ public class QueueList<T>{
     public QueueList(){
         frente = fin = null;
     }
+    public void enqueue(T dato) {
+        Nodo<T> nuevo = new Nodo<>(dato);
+        if (isEmpty()) {
+            frente = fin = nuevo;
+        } else {
+            fin.setSiguiente(nuevo);
+            fin = nuevo;
+        }
+    }
 }

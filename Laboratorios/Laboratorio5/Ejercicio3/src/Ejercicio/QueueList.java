@@ -37,4 +37,7 @@ public class QueueList<T>{
     public boolean isFull() {
         return false;
     }
+    public void destroyQueue() {
+        frente = fin = null;
+    }
 }

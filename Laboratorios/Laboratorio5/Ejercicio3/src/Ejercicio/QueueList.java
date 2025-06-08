@@ -40,4 +40,12 @@ public class QueueList<T>{
     public void destroyQueue() {
         frente = fin = null;
     }
+    public void printQueue() {
+        Nodo<T> actual = frente;
+        while (actual != null) {
+            System.out.print(actual.getDato() + " ");
+            actual = actual.getSiguiente();
+        }
+        System.out.println();
+    }
 }

@@ -17,4 +17,8 @@ public class StackList<T>{
         cima = cima.getSiguiente();
         return dato;
     }
+    public T top() {
+        if (isEmpty()) throw new RuntimeException("Pila vacía");
+        return cima.getDato();
+    }
 }

@@ -24,4 +24,7 @@ public class StackList<T>{
     public boolean isEmpty() {
         return cima == null;
     }
+    public boolean isFull() {
+        return false;
+    }
 }

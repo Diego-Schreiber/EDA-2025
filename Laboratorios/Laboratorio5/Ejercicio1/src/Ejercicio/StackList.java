@@ -21,4 +21,7 @@ public class StackList<T>{
         if (isEmpty()) throw new RuntimeException("Pila vacía");
         return cima.getDato();
     }
+    public boolean isEmpty() {
+        return cima == null;
+    }
 }

@@ -31,4 +31,7 @@ public class QueueList<T>{
         if (isEmpty()) throw new RuntimeException("Cola vacía");
         return fin.getDato();
     }
+    public boolean isEmpty() {
+        return frente == null;
+    }
 }

@@ -30,4 +30,12 @@ public class StackList<T>{
     public void destroyStack() {
         cima = null;
     }
+    public void printStack() {
+        Nodo<T> actual = cima;
+        while (actual != null) {
+            System.out.print(actual.getDato() + " ");
+            actual = actual.getSiguiente();
+        }
+        System.out.println();
+    }
 }

@@ -23,4 +23,8 @@ public class QueueList<T>{
         if (frente == null) fin = null;
         return dato;
     }
+    public T front() {
+        if (isEmpty()) throw new RuntimeException("Cola vacía");
+        return frente.getDato();
+    }
 }

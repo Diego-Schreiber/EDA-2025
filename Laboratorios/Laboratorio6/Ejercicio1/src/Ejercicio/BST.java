@@ -9,5 +9,7 @@ public class BST <T extends Comparable> {
     public BST (Node<T> r){
         root=r;
     }
-
+    public Node<T> getRoot(){
+        return root;
+    }
 }

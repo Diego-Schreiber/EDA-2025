@@ -90,4 +90,14 @@ public class BST <T extends Comparable> {
         else return n;
         }
     }
+    public T minRecover(){
+        return minRecover(this.root).getDato();
+    }
+    public Node<T> minRecover(Node<T> subArbol){
+        Node<T> actual=subArbol;
+        while(actual.getLeft() != null){
+            actual=actual.getLeft();
+        }
+        return actual;
+    }
 }

@@ -110,4 +110,36 @@ public class BST <T extends Comparable> {
         }
         return actual;
     }
+    public String postOrder(){
+        if (this.root != null) return postOrder(this.root);
+        else return "*";
+    }
+    protected String postOrder(Node<T> actual){
+        String res = "";
+        if (actual.getLeft() != null) res += postOrder(actual.getLeft());
+        if (actual.getRight() != null) res += postOrder(actual.getRight());
+        return res + actual.getDato().toString() + ",";
+    }
+    public String preOrder(){
+        if (this.root != null) return preOrder(this.root);
+        else return "*";
+    }
+    protected String preOrder(Node<T> actual){
+        String res = "";
+        res += actual.getDato().toString() + ",";
+        if (actual.getLeft() != null) res += preOrder(actual.getLeft());
+        if (actual.getRight() != null) res += preOrder(actual.getRight());
+        return res;
+    }
+    public String inOrder(){
+        if (this.root != null) return inOrder(this.root);
+        else return "*";
+    }
+    protected String inOrder(Node<T> actual){
+        String res = "";
+        if (actual.getLeft() != null) res += inOrder(actual.getLeft());
+        res += actual.getDato().toString() + ","; 
+        if (actual.getRight() != null) res += inOrder(actual.getRight());
+        return res;
+    }
 }

@@ -1,6 +1,9 @@
 package Ejercicio;
 //Autor: Diego Schreiber
 //Clase arbol binario de busqueda
+import org.graphstream.graph.*;
+import org.graphstream.graph.implementations.*;
+import java.util.*;
 public class BST <T extends Comparable> {
     private Node<T> root;
     public BST (){
@@ -153,5 +156,56 @@ public class BST <T extends Comparable> {
         while(actual.getRight()!=null)
             actual=actual.getRight();
         return actual.getDato();
+    }
+    private double nextX;
+    private int nodeCount;
+    private Map<Node<T>, String> idMap = new HashMap<>();
+    public void graficar() {
+        System.setProperty("org.graphstream.ui", "swing");
+        Graph graph = new SingleGraph("BST");
+        nodeCount = 0;
+        nextX = 0;
+        idMap.clear();
+
+        graficarRecursivo(graph, root, null);
+        asignarPosiciones(root, 0, graph);
+
+        for (org.graphstream.graph.Node node : graph) {
+            node.setAttribute("ui.label", node.getId());
+        }
+
+        graph.display();
+    }
+    private void graficarRecursivo(Graph graph, Node<T> actual, String padreId) {
+        if (actual == null) return;
+        String actualId = actual.getDato().toString() + "-" + nodeCount++;
+        idMap.put(actual, actualId);
+        graph.addNode(actualId);
+
+        if (padreId != null)
+            graph.addEdge(padreId + "-" + actualId, padreId, actualId, true);
+
+        graficarRecursivo(graph, actual.getLeft(), actualId);
+        graficarRecursivo(graph, actual.getRight(), actualId);
+    }
+    private double asignarPosiciones(Node<T> actual, int nivel, Graph graph) {
+        if (actual == null) return -1;
+        double xLeft = asignarPosiciones(actual.getLeft(), nivel + 1, graph);
+        double xRight = asignarPosiciones(actual.getRight(), nivel + 1, graph);
+        double x;
+        if (xLeft == -1 && xRight == -1) {
+            x = nextX;
+            nextX += 3;
+        } else if (xLeft != -1 && xRight != -1) {
+            x = (xLeft + xRight) / 2.0;
+        } else {
+            x = (xLeft != -1) ? xLeft : xRight;
+        }
+        String actualId = idMap.get(actual);
+        if (actualId != null) {
+            org.graphstream.graph.Node node = graph.getNode(actualId);
+            node.setAttribute("xy", x, nivel * 3);
+        }
+        return x;
     }
 }

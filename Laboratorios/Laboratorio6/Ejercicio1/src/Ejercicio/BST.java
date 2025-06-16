@@ -100,4 +100,14 @@ public class BST <T extends Comparable> {
         }
         return actual;
     }
+    public T maxRecover(){
+        return maxRecover(this.root).getDato();
+    }
+    public Node<T> maxRecover(Node<T> subArbol){
+        Node<T> actual=subArbol;
+        while(actual.getRight() != null){
+            actual=actual.getRight();
+        }
+        return actual;
+    }
 }

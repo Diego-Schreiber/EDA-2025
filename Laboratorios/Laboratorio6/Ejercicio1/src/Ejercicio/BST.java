@@ -73,4 +73,21 @@ public class BST <T extends Comparable> {
         }
         return actual;
     }
+    public T search(T x){
+        Node<T> res = searchNode(x, root);
+        if(res == null){
+            System.out.println("El dato "+ x + " no esta");
+            return null;
+        }
+        return res.getDato();
+    }
+    protected Node<T> searchNode(T x, Node<T> n){
+        if (n == null) return null;
+        else {
+            int resC = n.getDato().compareTo(x);
+        if (resC < 0) return searchNode(x, n.getRight());
+        else if (resC > 0) return searchNode(x, n.getLeft());
+        else return n;
+        }
+    }
 }

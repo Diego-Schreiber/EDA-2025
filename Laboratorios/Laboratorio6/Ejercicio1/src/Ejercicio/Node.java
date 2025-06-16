@@ -13,5 +13,4 @@ public class Node <T extends Comparable>{
     public Node(T d){
         this(d,null,null);
     }
-
 }

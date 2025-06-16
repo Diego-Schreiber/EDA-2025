@@ -142,4 +142,16 @@ public class BST <T extends Comparable> {
         if (actual.getRight() != null) res += inOrder(actual.getRight());
         return res;
     }
+    public T sucesor(Node<T> n){
+        Node<T> actual=n.getRight();
+        while(actual.getLeft()!=null)
+            actual=actual.getLeft();
+        return actual.getDato();
+    }
+    public T predecesor(Node<T> n){
+        Node<T> actual=n.getLeft();
+        while(actual.getRight()!=null)
+            actual=actual.getRight();
+        return actual.getDato();
+    }
 }

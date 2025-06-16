@@ -12,4 +12,10 @@ public class BST <T extends Comparable> {
     public Node<T> getRoot(){
         return root;
     }
+    public boolean isEmpty(){
+        return root==null;
+    }
+    public void destroy(){
+        root=null;
+    }
 }

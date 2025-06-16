@@ -35,4 +35,42 @@ public class BST <T extends Comparable> {
         }
         return actual;
     }
+    public void remove(T x){
+        this.root = removeNode(x, this.root);
+    }
+    protected Node<T> removeNode(T x, Node<T> actual) {
+        if (actual == null) {
+            System.out.println(x + " no esta");
+            return null;
+        }
+        int resC = actual.getDato().compareTo(x);
+        if (resC < 0) {
+            actual.setRight(removeNode(x, actual.getRight()));
+        } else if (resC > 0) {
+            actual.setLeft(removeNode(x, actual.getLeft()));
+        } else {
+            if (actual.getLeft() != null && actual.getRight() != null) {
+                Node<T> min = minRecover(actual.getRight());
+                actual.setDato(min.getDato());
+                actual.setRight(minRemove(actual.getRight()));
+            } else {
+                actual = (actual.getLeft() != null) ? actual.getLeft() : actual.getRight();
+            }
+        }
+        return actual;
+    }
+    public T minRemove() {
+        T min = minRecover();
+        this.root = minRemove(this.root);
+        return min;
+    }
+    protected Node<T> minRemove(Node<T> actual) {
+        if (actual.getLeft() != null) {
+            actual.setLeft(minRemove(actual.getLeft()));
+        }
+        else {
+            actual = actual.getRight();
+        }
+        return actual;
+    }
 }

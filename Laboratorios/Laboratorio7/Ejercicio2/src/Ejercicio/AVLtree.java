@@ -6,5 +6,7 @@ public class AVLTree<T extends Comparable<T>> {
     public AVLTree (){
         raiz=null;
     }
-
+    public boolean isEmpty() {
+        return raiz == null;
+    }
 }

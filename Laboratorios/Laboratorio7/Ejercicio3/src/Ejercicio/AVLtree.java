@@ -1,6 +1,9 @@
 package Ejercicio;
 //Autor: Diego Schreiber
 //Clase arbol AVL
+import org.graphstream.graph.Graph;
+import org.graphstream.graph.implementations.SingleGraph;
+import org.graphstream.graph.Node;
 public class AVLTree<T extends Comparable<T>> {
     private AVLNode<T> raiz;
     public AVLTree (){
@@ -181,4 +184,37 @@ public class AVLTree<T extends Comparable<T>> {
             System.out.print(nodo.valor + " ");
         }
     }
+    public void graficar() {
+    System.setProperty("org.graphstream.ui", "swing");
+    Graph graph = new SingleGraph("Árbol AVL");
+
+    graficarRec(raiz, null, graph, "root");
+
+    graph.setAttribute("ui.stylesheet", styleSheet);
+    graph.display();
+    }
+    private void graficarRec(AVLNode<T> nodo, String padreId, Graph graph, String id) {
+        if (nodo == null) return;
+            graph.addNode(id).setAttribute("ui.label", nodo.valor.toString());
+        if (padreId != null) {
+            graph.addEdge(padreId + "-" + id, padreId, id, true);
+        }
+        if (nodo.izquierda != null)
+            graficarRec(nodo.izquierda, id, graph, id + "L");
+        if (nodo.derecha != null)
+            graficarRec(nodo.derecha, id, graph, id + "R");
+}
+protected String styleSheet =
+    "node {" +
+    "   fill-color: lightblue;" +
+    "   size: 30px;" +
+    "   text-size: 16px;" +
+    "   text-alignment: center;" +
+    "   stroke-mode: plain;" +
+    "   stroke-color: black;" +
+    "}" +
+    "edge {" +
+    "   arrow-shape: arrow;" +
+    "   arrow-size: 10px, 5px;" +
+    "}";
 }

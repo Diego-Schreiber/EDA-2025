@@ -112,4 +112,14 @@ public class AVLTree<T extends Comparable<T>> {
     public T Max() {
         return isEmpty() ? null : maxNode(raiz).valor;
     }
+    public boolean search(T valor) {
+        return buscar(raiz, valor);
+    }
+    private boolean buscar(AVLNode<T> nodo, T valor) {
+        if (nodo == null) return false;
+        if (valor.compareTo(nodo.valor) == 0) return true;
+        return valor.compareTo(nodo.valor) < 0
+            ? buscar(nodo.izquierda, valor)
+            : buscar(nodo.derecha, valor);
+    }
 }

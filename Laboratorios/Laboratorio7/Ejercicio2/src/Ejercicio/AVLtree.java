@@ -98,4 +98,8 @@ public class AVLTree<T extends Comparable<T>> {
         }
         return nodo;
     }
+    private AVLNode<T> minNode(AVLNode<T> nodo) {
+        while (nodo.izquierda != null) nodo = nodo.izquierda;
+        return nodo;
+    }
 }

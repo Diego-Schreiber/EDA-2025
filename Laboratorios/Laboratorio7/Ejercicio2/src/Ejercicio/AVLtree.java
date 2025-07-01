@@ -122,4 +122,17 @@ public class AVLTree<T extends Comparable<T>> {
             ? buscar(nodo.izquierda, valor)
             : buscar(nodo.derecha, valor);
     }
+    public T predecesor(T valor) {
+        AVLNode<T> nodo = raiz;
+        T pred = null;
+        while (nodo != null) {
+            if (valor.compareTo(nodo.valor) > 0) {
+                pred = nodo.valor;
+                nodo = nodo.derecha;
+            } else {
+                nodo = nodo.izquierda;
+            }
+        }
+        return pred;
+    }
 }

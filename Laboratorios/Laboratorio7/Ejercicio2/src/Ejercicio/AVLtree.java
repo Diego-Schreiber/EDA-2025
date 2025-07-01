@@ -106,4 +106,7 @@ public class AVLTree<T extends Comparable<T>> {
         while (nodo.derecha != null) nodo = nodo.derecha;
         return nodo;
     }
+    public T Min() {
+        return isEmpty() ? null : minNode(raiz).valor;
+    }
 }

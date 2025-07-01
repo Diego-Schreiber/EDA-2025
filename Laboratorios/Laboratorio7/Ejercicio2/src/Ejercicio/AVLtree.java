@@ -109,4 +109,7 @@ public class AVLTree<T extends Comparable<T>> {
     public T Min() {
         return isEmpty() ? null : minNode(raiz).valor;
     }
+    public T Max() {
+        return isEmpty() ? null : maxNode(raiz).valor;
+    }
 }

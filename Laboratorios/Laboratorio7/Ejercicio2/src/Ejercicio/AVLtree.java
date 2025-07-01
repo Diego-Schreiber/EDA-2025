@@ -9,4 +9,7 @@ public class AVLTree<T extends Comparable<T>> {
     public boolean isEmpty() {
         return raiz == null;
     }
+    public void destroy() {
+        raiz = null;
+    }
 }

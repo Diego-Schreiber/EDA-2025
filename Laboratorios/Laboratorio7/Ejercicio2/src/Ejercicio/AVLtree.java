@@ -36,4 +36,31 @@ public class AVLTree<T extends Comparable<T>> {
         y.altura = Math.max(altura(y.izquierda), altura(y.derecha)) + 1;
         return y;
     }
+    public void insert(T valor) {
+        raiz = insertar(raiz, valor);
+    }
+    private AVLNode<T> insertar(AVLNode<T> nodo, T valor) {
+        if (nodo == null) return new AVLNode<>(valor);
+        if (valor.compareTo(nodo.valor) < 0)
+            nodo.izquierda = insertar(nodo.izquierda, valor);
+        else if (valor.compareTo(nodo.valor) > 0)
+            nodo.derecha = insertar(nodo.derecha, valor);
+        else
+            return nodo; 
+        nodo.altura = 1 + Math.max(altura(nodo.izquierda), altura(nodo.derecha));
+        int balance = balanceFactor(nodo);
+        if (balance > 1 && valor.compareTo(nodo.izquierda.valor) < 0)
+            return rotacionSimpleDerecha(nodo);
+        if (balance < -1 && valor.compareTo(nodo.derecha.valor) > 0)
+            return rotacionSimpleIzquierda(nodo);
+        if (balance > 1 && valor.compareTo(nodo.izquierda.valor) > 0) {
+            nodo.izquierda = rotacionSimpleIzquierda(nodo.izquierda);
+            return rotacionSimpleDerecha(nodo);
+        }
+        if (balance < -1 && valor.compareTo(nodo.derecha.valor) < 0) {
+            nodo.derecha = rotacionSimpleDerecha(nodo.derecha);
+            return rotacionSimpleIzquierda(nodo);
+        }
+        return nodo;
+    }
 }

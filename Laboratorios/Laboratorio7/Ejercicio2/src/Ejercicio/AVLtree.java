@@ -102,4 +102,8 @@ public class AVLTree<T extends Comparable<T>> {
         while (nodo.izquierda != null) nodo = nodo.izquierda;
         return nodo;
     }
+    private AVLNode<T> maxNode(AVLNode<T> nodo) {
+        while (nodo.derecha != null) nodo = nodo.derecha;
+        return nodo;
+    }
 }

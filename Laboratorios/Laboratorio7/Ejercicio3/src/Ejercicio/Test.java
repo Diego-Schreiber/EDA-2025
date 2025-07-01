@@ -20,6 +20,7 @@ public class EDALAB7 {
             System.out.println("9. PreOrden");
             System.out.println("10. PostOrden");
             System.out.println("11. Vaciar arbol");
+            System.out.println("12. Graficar arbol");
             System.out.println("0. Salir");
             System.out.print("Opcion: ");
             opcion = scan.nextInt();
@@ -63,6 +64,9 @@ public class EDALAB7 {
                 case 11:
                     arbol.destroy();
                     System.out.println("Arbol vacio.");
+                    break;
+                case 12:
+                    arbol.graficar();
                     break;
             }
         } while (opcion != 0);

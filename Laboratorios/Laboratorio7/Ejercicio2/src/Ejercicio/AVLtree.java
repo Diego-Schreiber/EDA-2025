@@ -170,4 +170,15 @@ public class AVLTree<T extends Comparable<T>> {
             preOrder(nodo.derecha);
         }
     }
+    public void postOrder() {
+        postOrder(raiz);
+        System.out.println();
+    }
+    private void postOrder(AVLNode<T> nodo) {
+        if (nodo != null) {
+            postOrder(nodo.izquierda);
+            postOrder(nodo.derecha);
+            System.out.print(nodo.valor + " ");
+        }
+    }
 }

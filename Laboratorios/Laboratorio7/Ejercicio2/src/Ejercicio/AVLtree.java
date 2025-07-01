@@ -15,4 +15,7 @@ public class AVLTree<T extends Comparable<T>> {
     private int altura(AVLNode<T> nodo) {
         return nodo == null ? 0 : nodo.altura;
     }
+    private int balanceFactor(AVLNode<T> nodo) {
+        return nodo == null ? 0 : altura(nodo.izquierda) - altura(nodo.derecha);
+    }
 }

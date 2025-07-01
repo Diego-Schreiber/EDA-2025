@@ -63,4 +63,39 @@ public class AVLTree<T extends Comparable<T>> {
         }
         return nodo;
     }
+    public void remove(T valor) {
+        raiz = eliminar(raiz, valor);
+    }
+    private AVLNode<T> eliminar(AVLNode<T> nodo, T valor) {
+        if (nodo == null) return null;
+        if (valor.compareTo(nodo.valor) < 0)
+            nodo.izquierda = eliminar(nodo.izquierda, valor);
+        else if (valor.compareTo(nodo.valor) > 0)
+            nodo.derecha = eliminar(nodo.derecha, valor);
+        else {
+            if (nodo.izquierda == null || nodo.derecha == null) {
+                nodo = (nodo.izquierda != null) ? nodo.izquierda : nodo.derecha;
+            } else {
+                AVLNode<T> sucesor = minNode(nodo.derecha);
+                nodo.valor = sucesor.valor;
+                nodo.derecha = eliminar(nodo.derecha, sucesor.valor);
+            }
+        }
+        if (nodo == null) return null;
+        nodo.altura = 1 + Math.max(altura(nodo.izquierda), altura(nodo.derecha));
+        int balance = balanceFactor(nodo);
+        if (balance > 1 && balanceFactor(nodo.izquierda) >= 0)
+            return rotacionSimpleDerecha(nodo);
+        if (balance > 1 && balanceFactor(nodo.izquierda) < 0) {
+            nodo.izquierda = rotacionSimpleIzquierda(nodo.izquierda);
+            return rotacionSimpleDerecha(nodo);
+        }
+        if (balance < -1 && balanceFactor(nodo.derecha) <= 0)
+            return rotacionSimpleIzquierda(nodo);
+        if (balance < -1 && balanceFactor(nodo.derecha) > 0) {
+            nodo.derecha = rotacionSimpleDerecha(nodo.derecha);
+            return rotacionSimpleIzquierda(nodo);
+        }
+        return nodo;
+    }
 }

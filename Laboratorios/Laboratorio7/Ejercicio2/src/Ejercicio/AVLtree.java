@@ -12,4 +12,7 @@ public class AVLTree<T extends Comparable<T>> {
     public void destroy() {
         raiz = null;
     }
+    private int altura(AVLNode<T> nodo) {
+        return nodo == null ? 0 : nodo.altura;
+    }
 }

@@ -243,4 +243,22 @@ class BTree <Textends Comparable<T>>{
             }
         }
     }
+    private void borrowFromPrev(Node<T> parent, int index) {
+        Node<T> child = parent.children.get(index);
+        Node<T> sibling = parent.children.get(index - 1);
+        child.keys.add(0, parent.keys.get(index - 1));
+        parent.keys.set(index - 1, sibling.keys.remove(sibling.keys.size() - 1));
+        if (!sibling.isLeaf) {
+            child.children.add(0, sibling.children.remove(sibling.children.size() - 1));
+        }
+    }
+    private void borrowFromNext(Node<T> parent, int index) {
+        Node<T> child = parent.children.get(index);
+        Node<T> sibling = parent.children.get(index + 1);
+        child.keys.add(parent.keys.get(index));
+        parent.keys.set(index, sibling.keys.remove(0));
+        if (!sibling.isLeaf) {
+            child.children.add(sibling.children.remove(0));
+        }
+    }
 }

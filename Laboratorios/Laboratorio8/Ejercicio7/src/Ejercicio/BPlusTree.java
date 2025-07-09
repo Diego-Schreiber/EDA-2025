@@ -87,4 +87,16 @@ public class BPlusTree<T extends Comparable<T>> {
             curr = curr.children.get(curr.children.size() - 1);
         return curr.keys.get(curr.keys.size() - 1);
     }
+    public T Predecesor(T key) {
+        List<T> all = getAllKeys();
+        int index = all.indexOf(key);
+        if (index > 0) return all.get(index - 1);
+        return null;
+    }
+    public T Sucesor(T key) {
+        List<T> all = getAllKeys();
+        int index = all.indexOf(key);
+        if (index >= 0 && index < all.size() - 1) return all.get(index + 1);
+        return null;
+    }
 }

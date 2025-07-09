@@ -57,4 +57,11 @@ public class BPlusTree<T extends Comparable<T>> {
         parent.keys.add(i, sibling.keys.get(0));
         parent.children.add(i + 1, sibling);
     }
+    public void remove(T key) {
+        List<T> all = getAllKeys();
+        if (all.remove(key)) {
+            destroy();
+            for (T k : all) insert(k);
+        }
+    }
 }

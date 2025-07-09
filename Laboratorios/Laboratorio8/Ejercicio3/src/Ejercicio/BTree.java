@@ -12,4 +12,7 @@ class BTree <Textends Comparable<T>>{
     public void destroy() {
         root = null;
     }
+    public boolean isEmpty() {
+        return root == null || root.keys.isEmpty();
+    }
 }

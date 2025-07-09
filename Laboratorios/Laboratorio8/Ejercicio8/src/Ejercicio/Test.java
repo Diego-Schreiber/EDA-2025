@@ -23,7 +23,8 @@ public class Test {
             System.out.println("5. Maximo");
             System.out.println("6. Predecesor");
             System.out.println("7. Sucesor");
-            System.out.println("8. Destruir");
+            System.out.println("8. Mostrar arbol");
+            System.out.println("9. Destruir");
             System.out.println("0. Salir");
             System.out.print("Opcion: ");
             option = sc.nextInt();
@@ -55,6 +56,10 @@ public class Test {
                     System.out.println("Sucesor: " + tree.Sucesor(sc.nextInt()));
                     break;
                 case 8:
+                    System.out.println("Visualizando el arbol...");
+                    tree.drawGraph();
+                    break;
+                case 9:
                     tree.destroy();
                     System.out.println("Arbol destruido.");
                     break;
@@ -67,3 +72,4 @@ public class Test {
         } while (option != 0);
     }
 }
+

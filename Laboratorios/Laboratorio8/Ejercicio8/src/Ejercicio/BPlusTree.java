@@ -2,6 +2,8 @@ package Ejercicio;
 //Autor: Diego Schreiber
 //Clase para arbol B+
 import java.util.*;
+import org.graphstream.graph.*;
+import org.graphstream.graph.implementations.*;
 public class BPlusTree<T extends Comparable<T>> {
     private BPlusNode<T> root;
     private int order;
@@ -57,13 +59,6 @@ public class BPlusTree<T extends Comparable<T>> {
         parent.keys.add(i, sibling.keys.get(0));
         parent.children.add(i + 1, sibling);
     }
-    public void remove(T key) {
-        List<T> all = getAllKeys();
-        if (all.remove(key)) {
-            destroy();
-            for (T k : all) insert(k);
-        }
-    }
     public boolean search(T key) {
         return searchRecursive(root, key);
     }
@@ -98,5 +93,84 @@ public class BPlusTree<T extends Comparable<T>> {
         int index = all.indexOf(key);
         if (index >= 0 && index < all.size() - 1) return all.get(index + 1);
         return null;
+    }
+    public void remove(T key) {
+        List<T> all = getAllKeys();
+        if (all.remove(key)) {
+            destroy();
+            for (T k : all) insert(k);
+        }
+    }
+    public String toString() {
+        return writeTree();
+    }
+    public String writeTree() {
+        StringBuilder sb = new StringBuilder();
+        Queue<BPlusNode<T>> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            while (size-- > 0) {
+                BPlusNode<T> node = queue.poll();
+                sb.append(node.keys).append(" ");
+                if (!node.isLeaf)
+                    queue.addAll(node.children);
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+    private List<T> getAllKeys() {
+        List<T> result = new ArrayList<>();
+        BPlusNode<T> curr = root;
+        while (!curr.isLeaf) curr = curr.children.get(0);
+        while (curr != null) {
+            result.addAll(curr.keys);
+            curr = curr.next;
+        }
+        return result;
+    }
+    public void drawGraph() {
+        System.setProperty("org.graphstream.ui", "swing");
+        Graph graph = new SingleGraph("B+ Tree");
+        Queue<BPlusNode<T>> queue = new LinkedList<>();
+        Queue<String> names = new LinkedList<>();
+        int idCounter = 0;
+        queue.add(root);
+        names.add("n" + (idCounter++));
+        graph.addNode("n0").setAttribute("ui.label", root.keys.toString());
+        while (!queue.isEmpty()) {
+            BPlusNode<T> node = queue.poll();
+            String parentId = names.poll();
+            for (int i = 0; i < node.children.size(); i++) {
+                BPlusNode<T> child = node.children.get(i);
+                String childId = "n" + (idCounter++);
+                org.graphstream.graph.Node gNode = graph.addNode(childId);
+                gNode.setAttribute("ui.label", child.keys.toString());
+                graph.addEdge(parentId + "-" + childId, parentId, childId, true);
+                queue.add(child);
+                names.add(childId);
+            }
+        }
+        graph.setAttribute("ui.stylesheet", styleSheet());
+        graph.display();
+    }
+    private String styleSheet() {
+        return """
+            node {
+                shape: box;
+                fill-color: #6699cc;
+                size: 60px, 30px;
+                text-size: 16px;
+                text-alignment: center;
+                text-color: black;
+                stroke-mode: plain;
+                stroke-color: black;
+            }
+            edge {
+                arrow-size: 10px, 5px;
+            }
+            """;
     }
 }

@@ -75,4 +75,16 @@ public class BPlusTree<T extends Comparable<T>> {
         i = i >= 0 ? i + 1 : -(i + 1);
         return searchRecursive(node.children.get(i), key);
     }
+    public T Min() {
+        BPlusNode<T> curr = root;
+        while (!curr.isLeaf)
+            curr = curr.children.get(0);
+        return curr.keys.get(0);
+    }
+    public T Max() {
+        BPlusNode<T> curr = root;
+        while (!curr.isLeaf)
+            curr = curr.children.get(curr.children.size() - 1);
+        return curr.keys.get(curr.keys.size() - 1);
+    }
 }

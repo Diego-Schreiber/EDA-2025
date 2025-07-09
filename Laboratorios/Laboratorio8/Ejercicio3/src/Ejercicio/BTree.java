@@ -9,4 +9,7 @@ class BTree <Textends Comparable<T>>{
         this.t = t;
         this.root = new Node<>(true);
     }
+    public void destroy() {
+        root = null;
+    }
 }

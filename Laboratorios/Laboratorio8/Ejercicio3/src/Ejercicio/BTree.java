@@ -228,4 +228,19 @@ class BTree <Textends Comparable<T>>{
         parent.keys.remove(index);
         parent.children.remove(index + 1);
     }
+    private void fill(Node<T> parent, int index) {
+        if (index > 0 && parent.children.get(index - 1).keys.size() > t - 1) {
+            borrowFromPrev(parent, index);
+        }
+        else if (index < parent.children.size() - 1 && parent.children.get(index + 1).keys.size() > t - 1) {
+            borrowFromNext(parent, index);
+        }
+        else {
+            if (index < parent.children.size() - 1) {
+                fuse(parent, index);
+            } else {
+               fuse(parent, index - 1);
+            }
+        }
+    }
 }

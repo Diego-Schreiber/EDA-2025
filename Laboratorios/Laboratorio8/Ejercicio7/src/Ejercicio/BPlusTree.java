@@ -41,4 +41,20 @@ public class BPlusTree<T extends Comparable<T>> {
             insertNonFull(node.children.get(i), key);
         }
     }
+    public void dividedNode(BPlusNode<T> parent, int i) {
+        BPlusNode<T> full = parent.children.get(i);
+        BPlusNode<T> sibling = new BPlusNode<>(full.isLeaf);
+        int mid = order;
+        sibling.keys.addAll(full.keys.subList(mid, full.keys.size()));
+        full.keys.subList(mid, full.keys.size()).clear();
+        if (!full.isLeaf) {
+            sibling.children.addAll(full.children.subList(mid, full.children.size()));
+            full.children.subList(mid, full.children.size()).clear();
+        } else {
+            sibling.next = full.next;
+            full.next = sibling;
+        }
+        parent.keys.add(i, sibling.keys.get(0));
+        parent.children.add(i + 1, sibling);
+    }
 }

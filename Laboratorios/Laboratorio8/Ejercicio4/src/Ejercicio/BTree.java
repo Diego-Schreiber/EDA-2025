@@ -1,8 +1,10 @@
 package Ejercicio;
-/7Autor: Diego Schreiber
+//Autor: Diego Schreiber
 //Clase Arbol B
+import org.graphstream.graph.*;
+import org.graphstream.graph.implementations.*;
 import java.util.*;
-class BTree <Textends Comparable<T>>{
+class BTree<T extends Comparable<T>> {
     private int t;
     private Node<T> root;
     public BTree(int t) {
@@ -79,49 +81,8 @@ class BTree <Textends Comparable<T>>{
             }
         }
     }
-    private void remove(Node<T> node, T key) {
-        int index = findKey(node, key);
-        if (index < node.keys.size() && node.keys.get(index).equals(key)) {    
-            if (node.isLeaf) {
-                node.keys.remove(index);
-            } else {
-                Node<T> child = node.children.get(index);
-                if (child.keys.size() > t - 1) {
-                    T predecessor = getPredecessor(child);
-                    node.keys.set(index, predecessor);
-                    remove(child, predecessor);
-                } else {
-                    Node<T> nextChild = node.children.get(index + 1);                
-                    if (nextChild.keys.size() > t - 1) {
-                        T successor = getSuccessor(nextChild);
-                        node.keys.set(index, successor);
-                        remove(nextChild, successor);
-                    } else {
-                        fuse(node, index);
-                        remove(child, key);
-                    }
-                }
-            }
-        } else {
-            Node<T> child = node.children.get(index);
-            if (child.keys.size() == t - 1) {
-                fill(node, index);
-            }
-            remove(node.children.get(index), key);
-        }
-    }
     public boolean search(T key) {
         return search(root, key);
-    }
-    private boolean search(Node<T> node, T key) {
-        int i = findKey(node, key);
-        if (i < node.keys.size() && node.keys.get(i).equals(key)) {
-            return true;
-        }
-        if (node.isLeaf) {
-            return false;
-        }
-        return search(node.children.get(i), key);
     }
     public T Min() {
         if (root == null) return null;
@@ -158,6 +119,47 @@ class BTree <Textends Comparable<T>>{
             i++;
         }
         return i;
+    }
+    private boolean search(Node<T> node, T key) {
+        int i = findKey(node, key);
+        if (i < node.keys.size() && node.keys.get(i).equals(key)) {
+            return true;
+        }
+        if (node.isLeaf) {
+            return false;
+        }
+        return search(node.children.get(i), key);
+    }
+    private void remove(Node<T> node, T key) {
+        int index = findKey(node, key);
+        if (index < node.keys.size() && node.keys.get(index).equals(key)) {    
+            if (node.isLeaf) {
+                node.keys.remove(index);
+            } else {
+                Node<T> child = node.children.get(index);
+                if (child.keys.size() > t - 1) {
+                    T predecessor = getPredecessor(child);
+                    node.keys.set(index, predecessor);
+                    remove(child, predecessor);
+                } else {
+                    Node<T> nextChild = node.children.get(index + 1);                
+                    if (nextChild.keys.size() > t - 1) {
+                        T successor = getSuccessor(nextChild);
+                        node.keys.set(index, successor);
+                        remove(nextChild, successor);
+                    } else {
+                        fuse(node, index);
+                        remove(child, key);
+                    }
+                }
+            }
+        } else {
+            Node<T> child = node.children.get(index);
+            if (child.keys.size() == t - 1) {
+                fill(node, index);
+            }
+            remove(node.children.get(index), key);
+        }
     }
     public T Predecesor(T key) {
         return findPredecessor(root, key);
@@ -261,4 +263,25 @@ class BTree <Textends Comparable<T>>{
             child.children.add(sibling.children.remove(0));
         }
     }
+    public void writeTree() {
+        System.setProperty("org.graphstream.ui", "swing");
+        Graph graph = new SingleGraph("BTree");
+        graph.setAttribute("ui.stylesheet",
+            "node { shape: box; fill-color: lightblue; stroke-mode: plain; size-mode: fit; padding: 5px; text-size: 16px; text-alignment: center; }");
+        graph.display();
+        buildGraph(graph, root, "root");
+    }
+    private void buildGraph(Graph graph, Node<T> node, String nodeId) {
+        org.graphstream.graph.Node gNode = graph.addNode(nodeId);
+        gNode.setAttribute("ui.label", node.keys.toString());
+        for (int i = 0; i < node.children.size(); i++) {
+            String childId = nodeId + "-" + i;
+            buildGraph(graph, node.children.get(i), childId);
+            try {
+                graph.addEdge(nodeId + "_" + childId, nodeId, childId, true);
+            } catch (EdgeRejectedException e) {
+            }
+        }
+    }
 }
+

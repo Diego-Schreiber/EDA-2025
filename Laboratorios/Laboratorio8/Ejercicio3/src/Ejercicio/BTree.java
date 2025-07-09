@@ -123,4 +123,20 @@ class BTree <Textends Comparable<T>>{
         }
         return search(node.children.get(i), key);
     }
+    public T Min() {
+        if (root == null) return null;
+        Node<T> node = root;
+        while (!node.isLeaf) {
+            node = node.children.get(0);
+        }
+        return node.keys.get(0);
+    }
+    public T Max() {
+        if (root == null) return null;
+        Node<T> node = root;
+        while (!node.isLeaf) {
+            node = node.children.get(node.children.size() - 1);
+        }
+        return node.keys.get(node.keys.size() - 1);
+    }
 }

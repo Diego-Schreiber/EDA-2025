@@ -217,4 +217,15 @@ class BTree <Textends Comparable<T>>{
         }
         return node.keys.get(0);
     }
+    private void fuse(Node<T> parent, int index) {
+        Node<T> leftChild = parent.children.get(index);
+        Node<T> rightChild = parent.children.get(index + 1);
+        leftChild.keys.add(parent.keys.get(index));
+        leftChild.keys.addAll(rightChild.keys);
+        if (!leftChild.isLeaf) {
+            leftChild.children.addAll(rightChild.children);
+        }
+        parent.keys.remove(index);
+        parent.children.remove(index + 1);
+    }
 }

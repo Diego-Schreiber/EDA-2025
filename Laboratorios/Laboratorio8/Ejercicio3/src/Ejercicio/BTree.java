@@ -139,4 +139,24 @@ class BTree <Textends Comparable<T>>{
         }
         return node.keys.get(node.keys.size() - 1);
     }
+    public String toString() {
+        return toString(root, "", true);
+    }
+    private String toString(Node<T> node, String indent, boolean last) {
+        StringBuilder sb = new StringBuilder(indent);
+        sb.append(last ? "R----" : "|----");
+        sb.append("[" + String.join(",", node.keys.toString()) + "]\n");
+        indent += last ? "    " : "|   ";
+        for (int i = 0; i < node.children.size(); i++) {
+            sb.append(toString(node.children.get(i), indent, i == node.children.size() - 1));
+        }
+        return sb.toString();
+    }
+    private int findKey(Node<T> node, T key) {
+        int i = 0;
+        while (i < node.keys.size() && key.compareTo(node.keys.get(i)) > 0) {
+            i++;
+        }
+        return i;
+    }
 }

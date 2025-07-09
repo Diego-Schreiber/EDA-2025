@@ -1,6 +1,6 @@
 package Ejercicio;
 //Autor: Diego Schreiber
-//Clase Test del ejercicio 3
+//Clase Test del ejercicio 4
 import java.util.Scanner;
 public class Test {
     public static void main(String[] args) {
@@ -23,7 +23,8 @@ public class Test {
             System.out.println("5. Maximo");
             System.out.println("6. Predecesor");
             System.out.println("7. Sucesor");
-            System.out.println("8. Destruir Arbol");
+            System.out.println("8. Mostrar Arbol");
+            System.out.println("9. Destruir Arbol");
             System.out.println("0. Salir");
             System.out.print("Opcion: ");
             option = scanner.nextInt();
@@ -51,6 +52,10 @@ public class Test {
                     System.out.println("Sucesor: " + tree.Sucesor(scanner.nextInt()));
                 }break;
                 case 8: {
+                    System.out.println("Mostrando arbol graficamente...");
+                    tree.writeTree();
+                }break;
+                case 9: {
                     tree.destroy();
                     System.out.println("Arbol destruido.");
                 }break;

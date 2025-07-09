@@ -66,4 +66,17 @@ class BTree <Textends Comparable<T>>{
         parent.keys.add(index, midKey);
         parent.children.add(index + 1, newNode);
     }
+    public void remove(T key) {
+        if (root == null) {
+            return;
+        }
+        remove(root, key);
+        if (root.keys.isEmpty()) {
+            if (root.isLeaf) {
+                root = null;
+            } else {
+                root = root.children.get(0);
+            }
+        }
+    }
 }

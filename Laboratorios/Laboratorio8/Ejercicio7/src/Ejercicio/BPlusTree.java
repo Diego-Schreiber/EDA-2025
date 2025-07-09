@@ -64,4 +64,15 @@ public class BPlusTree<T extends Comparable<T>> {
             for (T k : all) insert(k);
         }
     }
+    public boolean search(T key) {
+        return searchRecursive(root, key);
+    }
+    private boolean searchRecursive(BPlusNode<T> node, T key) {
+        int i = Collections.binarySearch(node.keys, key);
+        if (i >= 0 && node.isLeaf) return true;
+        if (node.isLeaf) return false;
+
+        i = i >= 0 ? i + 1 : -(i + 1);
+        return searchRecursive(node.children.get(i), key);
+    }
 }

@@ -110,4 +110,17 @@ class BTree <Textends Comparable<T>>{
             remove(node.children.get(index), key);
         }
     }
+    public boolean search(T key) {
+        return search(root, key);
+    }
+    private boolean search(Node<T> node, T key) {
+        int i = findKey(node, key);
+        if (i < node.keys.size() && node.keys.get(i).equals(key)) {
+            return true;
+        }
+        if (node.isLeaf) {
+            return false;
+        }
+        return search(node.children.get(i), key);
+    }
 }

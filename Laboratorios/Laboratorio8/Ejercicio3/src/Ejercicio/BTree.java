@@ -159,4 +159,62 @@ class BTree <Textends Comparable<T>>{
         }
         return i;
     }
+    public T Predecesor(T key) {
+        return findPredecessor(root, key);
+    }
+    public T Sucesor(T key) {
+        return findSuccessor(root, key);
+    }
+    private T findPredecessor(Node<T> node, T key) {
+        int i = 0;
+        while (i < node.keys.size() && key.compareTo(node.keys.get(i)) > 0) {
+            i++;
+        }
+        if (i < node.keys.size() && key.compareTo(node.keys.get(i)) == 0) {
+            if (!node.isLeaf) {
+                Node<T> current = node.children.get(i);
+                while (!current.isLeaf) {
+                    current = current.children.get(current.children.size() - 1);
+                }
+                return current.keys.get(current.keys.size() - 1);
+            } else if (i > 0) {
+            return node.keys.get(i - 1);
+            }
+        } else if (!node.isLeaf) {
+            return findPredecessor(node.children.get(i), key);
+        }
+        return null;
+    }
+    private T findSuccessor(Node<T> node, T key) {
+        int i = 0;
+        while (i < node.keys.size() && key.compareTo(node.keys.get(i)) > 0) {
+            i++;
+        }
+        if (i < node.keys.size() && key.compareTo(node.keys.get(i)) == 0) {
+            if (!node.isLeaf) {
+                Node<T> current = node.children.get(i + 1);
+                while (!current.isLeaf) {
+                    current = current.children.get(0);
+                }
+                return current.keys.get(0);
+            } else if (i < node.keys.size() - 1) {
+                return node.keys.get(i + 1);
+            }
+        } else if (!node.isLeaf) {
+            return findSuccessor(node.children.get(i), key);
+        }
+    return null;
+    }
+    private T getPredecessor(Node<T> node) {
+        while (!node.isLeaf) {
+            node = node.children.get(node.children.size() - 1);
+        }
+        return node.keys.get(node.keys.size() - 1);
+    }
+    private T getSuccessor(Node<T> node) {
+        while (!node.isLeaf) {
+            node = node.children.get(0);
+        }
+        return node.keys.get(0);
+    }
 }

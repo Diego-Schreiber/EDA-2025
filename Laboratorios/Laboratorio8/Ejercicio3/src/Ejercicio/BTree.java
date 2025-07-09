@@ -79,4 +79,35 @@ class BTree <Textends Comparable<T>>{
             }
         }
     }
+    private void remove(Node<T> node, T key) {
+        int index = findKey(node, key);
+        if (index < node.keys.size() && node.keys.get(index).equals(key)) {    
+            if (node.isLeaf) {
+                node.keys.remove(index);
+            } else {
+                Node<T> child = node.children.get(index);
+                if (child.keys.size() > t - 1) {
+                    T predecessor = getPredecessor(child);
+                    node.keys.set(index, predecessor);
+                    remove(child, predecessor);
+                } else {
+                    Node<T> nextChild = node.children.get(index + 1);                
+                    if (nextChild.keys.size() > t - 1) {
+                        T successor = getSuccessor(nextChild);
+                        node.keys.set(index, successor);
+                        remove(nextChild, successor);
+                    } else {
+                        fuse(node, index);
+                        remove(child, key);
+                    }
+                }
+            }
+        } else {
+            Node<T> child = node.children.get(index);
+            if (child.keys.size() == t - 1) {
+                fill(node, index);
+            }
+            remove(node.children.get(index), key);
+        }
+    }
 }

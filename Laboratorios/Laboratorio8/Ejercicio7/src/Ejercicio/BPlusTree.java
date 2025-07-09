@@ -12,4 +12,7 @@ public class BPlusTree<T extends Comparable<T>> {
     public void destroy() {
         root = new BPlusNode<>(true);
     }
+    public boolean isEmpty() {
+        return root.keys.isEmpty();
+    }
 }

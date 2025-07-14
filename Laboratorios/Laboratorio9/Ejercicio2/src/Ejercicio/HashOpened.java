@@ -17,4 +17,15 @@ public class HashOpened<E>{
     private int hash(int key) {
         return (key & 0x7fffffff) % table.length;
     }
+    public void insert(Register<E> reg) {
+        int index = hash(reg.getKey());
+        for (Register<E> r : table[index]) {
+            if (r.getKey() == reg.getKey() && !r.isDeleted()) {
+                System.out.println("Clave duplicada: " + reg.getKey());
+                return;
+            }
+        }
+        table[index].add(reg);
+        System.out.println("Insertado: " + reg);
+    }
 }

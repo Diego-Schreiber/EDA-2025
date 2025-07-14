@@ -25,4 +25,8 @@ public Register<E> implements Comparable <Register<E>>{
     public void delete() {
         this.deleted = true;
     }
+    @Override
+    public int compareTo(Register<E> other) {
+        return Integer.compare(this.key, other.key);
+    }
 }

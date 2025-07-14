@@ -15,4 +15,7 @@ public class HashClosed<E>{
     private int hash(int key) {
         return (key & 0x7fffffff) % table.length;
     }
+    private int nextIndex(int index) {
+        return (index + 1) % table.length;
+    }
 }

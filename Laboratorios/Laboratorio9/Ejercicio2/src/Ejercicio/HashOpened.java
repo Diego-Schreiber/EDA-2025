@@ -28,4 +28,15 @@ public class HashOpened<E>{
         table[index].add(reg);
         System.out.println("Insertado: " + reg);
     }
+    public void delete(int key) {
+        int index = hash(key);
+        for (Register<E> r : table[index]) {
+            if (r.getKey() == key && !r.isDeleted()) {
+                r.delete();
+                System.out.println("Eliminado logicamente: " + key);
+                return;
+            }
+        }
+        System.out.println("Clave no encontrada: " + key);
+    }
 }

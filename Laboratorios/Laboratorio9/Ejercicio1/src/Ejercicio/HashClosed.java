@@ -42,4 +42,24 @@ public class HashClosed<E>{
 
         System.out.println("No se pudo insertar, tabla llena.");
     }
+    public void delete(int key) {
+        int index = hash(key);
+        int start = index;
+        do {
+            Register<E> current = table[index];
+            if (current == null) {
+                System.out.println("Clave no encontrada: " + key);
+                return;
+            }
+            if (current.getKey() == key && !current.isDeleted()) {
+                current.delete();
+                size--;
+                System.out.println("Eliminado logicamente: " + key);
+                return;
+            }
+            index = nextIndex(index);
+        } while (index != start);
+
+        System.out.println("Clave no encontrada: " + key);
+    }
 }

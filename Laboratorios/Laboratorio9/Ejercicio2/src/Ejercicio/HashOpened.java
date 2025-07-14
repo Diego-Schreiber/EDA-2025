@@ -39,4 +39,13 @@ public class HashOpened<E>{
         }
         System.out.println("Clave no encontrada: " + key);
     }
+    public Register<E> search(int key) {
+        int index = hash(key);
+        for (Register<E> r : table[index]) {
+            if (r.getKey() == key && !r.isDeleted()) {
+                return r;
+            }
+        }
+        return null;
+    }
 }

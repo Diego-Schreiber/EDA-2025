@@ -62,4 +62,19 @@ public class HashClosed<E>{
 
         System.out.println("Clave no encontrada: " + key);
     }
+    public Register<E> search(int key) {
+        int index = hash(key);
+        int start = index;
+        do {
+            Register<E> current = table[index];
+            if (current == null) {
+                return null;
+            }
+            if (current.getKey() == key && !current.isDeleted()) {
+                return current;
+            }
+            index = nextIndex(index);
+        } while (index != start);
+        return null;
+    }
 }

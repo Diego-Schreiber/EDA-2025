@@ -10,4 +10,10 @@ public Register<E> implements Comparable <Register<E>>{
         this.value=value;
         this.deleted=false;
     }
+    public int getKey() {
+        return key;
+    }
+    public E getValue() {
+        return value;
+    }
 }

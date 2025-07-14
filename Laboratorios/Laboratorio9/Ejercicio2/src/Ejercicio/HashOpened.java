@@ -1,17 +1,17 @@
 package Ejercicio;
 //Autor: Diego Schreiber
-//Clase hash abierto
+//Clase hash opened
 import java.util.LinkedList;
-public class HashOpened<E>{
+public class HashOpened<E> {
     private LinkedList<Register<E>>[] table;
-    @SupressWarnings("unchecked")
-    public HashOpened(int capacity){
-        table=new LinkedList[capacity];
-        for(int i=0;i<capacitu; i++){
-            table[i]0new LinkedList<>();
+    @SuppressWarnings("unchecked")
+    public HashOpened(int capacity) {
+        table = new LinkedList[capacity];
+        for (int i = 0; i < capacity; i++) {
+            table[i] = new LinkedList<>();
         }
     }
-    public HashOpened(){
+    public HashOpened() {
         this(16);
     }
     private int hash(int key) {
@@ -47,5 +47,19 @@ public class HashOpened<E>{
             }
         }
         return null;
+    }
+    public void showTable() {
+        System.out.println("\n--- Estado de la Tabla Hash (Abierto) ---");
+        for (int i = 0; i < table.length; i++) {
+            System.out.print(i + ": ");
+            if (table[i].isEmpty()) {
+                System.out.println("[VACIO]");
+            } else {
+                for (Register<E> r : table[i]) {
+                    System.out.print(r + " -> ");
+                }
+                System.out.println("null");
+            }
+        }
     }
 }

@@ -19,4 +19,10 @@ public Register<E> implements Comparable <Register<E>>{
     public void setValue(E value) {
         this.value = value;
     }
+    public boolean isDeleted() {
+        return deleted;
+    }
+    public void delete() {
+        this.deleted = true;
+    }
 }

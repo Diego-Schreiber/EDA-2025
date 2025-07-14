@@ -14,4 +14,7 @@ public class HashOpened<E>{
     public HashOpened(){
         this(16);
     }
+    private int hash(int key) {
+        return (key & 0x7fffffff) % table.length;
+    }
 }

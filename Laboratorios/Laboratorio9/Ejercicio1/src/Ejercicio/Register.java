@@ -16,4 +16,7 @@ public Register<E> implements Comparable <Register<E>>{
     public E getValue() {
         return value;
     }
+    public void setValue(E value) {
+        this.value = value;
+    }
 }

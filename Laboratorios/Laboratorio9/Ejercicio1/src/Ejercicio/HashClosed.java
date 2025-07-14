@@ -77,4 +77,15 @@ public class HashClosed<E>{
         } while (index != start);
         return null;
     }
+    public void showTable() {
+        System.out.println("\n--- Estado de la Tabla Hash (Cerrado) ---");
+        for (int i = 0; i < table.length; i++) {
+            System.out.print(i + ": ");
+            if (table[i] == null) {
+                System.out.println("[VACIO]");
+            } else {
+                System.out.println(table[i]);
+            }
+        }
+    }
 }
